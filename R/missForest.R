@@ -178,6 +178,8 @@ missForest <- function(xmis, maxiter = 10, ntree = 100, variablewise = FALSE,
     
     if (parallelize == "variables"){
       for (idx in idxList) {
+        print(idx)
+        print(Sys.time())
         results <- foreach(varInd = idx, .packages = 'randomForest') %cols% {
           obsi <- !NAloc[, varInd] # which i's are observed
           misi <- NAloc[, varInd] # which i's are missing
@@ -242,6 +244,8 @@ missForest <- function(xmis, maxiter = 10, ntree = 100, variablewise = FALSE,
     } else { # if parallelize != "variables"
       for (s in 1 : p) {
         varInd <- sort.j[s]
+        print(varInd)
+        print(Sys.time())
         if (noNAvar[[varInd]] != 0) {
           obsi <- !NAloc[, varInd]
           misi <- NAloc[, varInd]
